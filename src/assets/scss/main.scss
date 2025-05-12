@@ -1,0 +1,21 @@
+
+@use 'variables' as *;
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+// Common styles for all components.
+h1 {
+    color: $text-color;
+    font-size: 1.5rem;
+}
+p {
+    color: $text-color;
+    font-size: 1.2rem;
+}
+// Basic reset for all elements.
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
