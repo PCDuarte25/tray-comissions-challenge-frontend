@@ -1,10 +1,20 @@
 <template>
   <div class="sellers-list-container">
-    <h2>Vendedores Cadastrados</h2>
+    <div class="header-container">
+      <h2>Vendedores Cadastrados</h2>
+      <button @click="goToCreateSeller" class="create-seller-btn">
+        Cadastrar Vendedor
+      </button>
+    </div>
 
     <div v-if="sellers.length > 0" class="sellers-list">
       <ul>
-        <li v-for="seller in sellers" :key="seller.id">
+        <li
+          v-for="seller in sellers"
+          :key="seller.id"
+          @click="goToSellerDetails(seller.id)"
+          class="seller-row"
+        >
           <div class="seller-name">{{ seller.name }}</div>
           <div class="seller-email">{{ seller.email }}</div>
         </li>
@@ -31,10 +41,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const sellers = ref([])
 const currentPage = ref(1)
 const lastPage = ref(1)
+const router = useRouter()
 
 async function fetchSellers(page = 1) {
   const token = localStorage.getItem('token')
@@ -68,6 +80,14 @@ function changePage(page: number) {
   }
 }
 
+function goToSellerDetails(sellerId: number) {
+  router.push({ name: 'seller-details', params: { id: sellerId } })
+}
+
+function goToCreateSeller() {
+  router.push({ name: 'criar-vendedor' })
+}
+
 onMounted(() => {
   fetchSellers()
 })
@@ -75,6 +95,28 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.create-seller-btn {
+  background-color: $secondary-color;
+  color: $white-color;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}
 
 .sellers-list-container {
   padding: 2rem;
@@ -102,6 +144,7 @@ onMounted(() => {
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 1px solid $border-color;
+  cursor: pointer;
 
   &:last-child {
     border-bottom: none;

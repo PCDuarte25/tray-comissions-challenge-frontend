@@ -6,7 +6,6 @@
       <nav>
         <router-link to="/dashboard/vendedores" class="nav-link">Vendedores</router-link>
         <router-link to="/dashboard/vendas" class="nav-link">Vendas</router-link>
-        <router-link to="/dashboard/configuracoes" class="nav-link">Configurações</router-link>
       </nav>
     </div>
 
