@@ -63,6 +63,7 @@ const handleLogin = async () => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
 
 .login-container {
   display: flex;
@@ -123,11 +124,11 @@ const handleLogin = async () => {
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
 
     &:active {
-      background-color: darken($primary-color, 15%);
+      background-color: color.adjust($primary-color, $lightness: 15%);
     }
   }
 

@@ -111,6 +111,8 @@ const cancel = () => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
+
 
 .create-sale-container {
   padding: 2rem;
@@ -192,7 +194,7 @@ const cancel = () => {
   color: $white-color;
 
   &:hover:not(:disabled) {
-    background-color: darken($primary-color, 10%);
+    background-color: color.adjust($primary-color, $lightness: -10%);
   }
 }
 

@@ -73,6 +73,7 @@ async function createSeller() {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
 
 .create-seller-container {
   padding: 2rem;
@@ -158,7 +159,7 @@ async function createSeller() {
     margin-top: 0.5rem;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
 }

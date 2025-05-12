@@ -42,8 +42,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import type { Seller } from '@/types'
 
-const sellers = ref([])
+const sellers = ref<Seller[]>([])
 const currentPage = ref(1)
 const lastPage = ref(1)
 const router = useRouter()
@@ -95,6 +96,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
 
 .header-container {
   display: flex;
@@ -114,7 +116,7 @@ onMounted(() => {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: darken($secondary-color, 10%);
+    background-color: color.adjust($secondary-color, $lightness: -10%);
   }
 }
 
@@ -187,7 +189,7 @@ onMounted(() => {
     transition: background-color 0.3s ease;
 
     &:hover:not(:disabled) {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
 
     &:disabled {

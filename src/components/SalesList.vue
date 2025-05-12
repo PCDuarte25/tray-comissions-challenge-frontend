@@ -14,8 +14,8 @@
       <tbody>
         <tr v-for="sale in sales" :key="sale.id">
           <td>{{ sale.id }}</td>
-          <td>R$ {{ parseFloat(sale.value).toFixed(2) }}</td>
-          <td>R$ {{ parseFloat(sale.commission).toFixed(2) }}</td>
+          <td>R$ {{ parseFloat(String(sale.value)).toFixed(2) }}</td>
+          <td>R$ {{ parseFloat(String(sale.commission)).toFixed(2) }}</td>
           <td>{{ formatDate(sale.sale_date) }}</td>
         </tr>
       </tbody>
@@ -37,8 +37,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { Sale } from '@/types'
 
-const sales = ref([])
+const sales = ref<Sale[]>([])
 const currentPage = ref(1)
 const lastPage = ref(1)
 
@@ -79,6 +80,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
 
 .sales-list-container {
   padding: 2rem;
@@ -138,7 +140,7 @@ onMounted(() => {
     transition: background-color 0.3s ease;
 
     &:hover:not(:disabled) {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
 
     &:disabled {

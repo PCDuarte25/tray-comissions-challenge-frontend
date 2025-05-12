@@ -37,8 +37,8 @@
         <tbody>
           <tr v-for="sale in sales" :key="sale.id">
             <td>{{ sale.id }}</td>
-            <td>R$ {{ parseFloat(sale.value).toFixed(2) }}</td>
-            <td>R$ {{ parseFloat(sale.commission).toFixed(2) }}</td>
+            <td>R$ {{ parseFloat(String(sale.value)).toFixed(2) }}</td>
+            <td>R$ {{ parseFloat(String(sale.commission)).toFixed(2) }}</td>
             <td>{{ formatDate(sale.sale_date) }}</td>
           </tr>
         </tbody>
@@ -58,9 +58,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import type { Seller, Sale } from '@/types'
 
-const seller = ref(null)
-const sales = ref([])
+const seller = ref<Seller | null>(null)
+const sales = ref<Sale[]>([])
 const route = useRoute()
 const router = useRouter()
 const showToast = ref(false)
@@ -73,11 +74,11 @@ const formatDate = (dateStr: string) => {
   return `${day}-${month}-${year}`
 }
 
-const formatApiDate = (dateStr: string) => {
-  const date = new Date(dateStr)
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
+const formatApiDate = (date: string | Date) => {
+  const dateObj = typeof date === 'string' ? new Date(date) : date
+  const year = dateObj.getFullYear()
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0')
+  const day = String(dateObj.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
 }
 
@@ -172,6 +173,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/variables' as *;
+@use "sass:color";
 
 .seller-details-container {
   padding: 2rem;
@@ -216,7 +218,7 @@ onMounted(() => {
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
 
@@ -233,7 +235,7 @@ onMounted(() => {
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken($secondary-color, 10%);
+      background-color: color.adjust($secondary-color, $lightness: -10%);
     }
   }
 
