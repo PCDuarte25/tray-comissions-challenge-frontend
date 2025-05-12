@@ -10,9 +10,7 @@ const router = useRouter()
 
 const handleLogin = async () => {
   try {
-    // Aqui você fará a chamada para o backend e verificará a resposta
-    // Supondo que o token seja armazenado no localStorage
-    const res = await fetch('http://localhost:9000/api/login', {
+    const res = await fetch('http://localhost:8000/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,9 +27,11 @@ const handleLogin = async () => {
     }
 
     const data = await res.json()
-    localStorage.setItem('token', data.token)
 
-    // Redireciona para o Dashboard após o login
+    localStorage.setItem('token', data.data.token)
+
+    if (!data.data.token) throw new Error('Token não encontrado na resposta.')
+
     router.push('/dashboard')
   } catch (error) {
     errorMessage.value = 'Email ou senha incorretos.'
