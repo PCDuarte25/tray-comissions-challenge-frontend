@@ -53,7 +53,7 @@ async function fetchSellers(page = 1) {
   if (!token) return
 
   try {
-    const response = await fetch(`http://localhost:8000/api/v1/seller?page=${page}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/seller?page=${page}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

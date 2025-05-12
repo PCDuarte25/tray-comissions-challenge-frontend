@@ -53,7 +53,7 @@ const router = useRouter()
 const saleData = ref({
   seller_id: route.params.id as string,
   value: '',
-  sale_date: new Date().toISOString().split('T')[0] // Data atual como padrão
+  sale_date: new Date().toISOString().split('T')[0]
 })
 
 const loading = ref(false)
@@ -67,7 +67,7 @@ const submitSale = async () => {
   loading.value = true
 
   try {
-    const response = await fetch('http://localhost:8000/api/v1/sale', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/sale`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -118,12 +118,12 @@ const cancel = () => {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; // Alinha no topo do container
+  align-items: flex-start;
 }
 
 .form-wrapper {
   width: 100%;
-  max-width: 600px; // Largura máxima do formulário
+  max-width: 600px;
   background-color: $white-color;
   padding: 2rem;
   border-radius: 8px;
@@ -133,7 +133,7 @@ const cancel = () => {
     font-size: 1.8rem;
     color: $primary-color;
     margin-bottom: 1.5rem;
-    text-align: center; // Centraliza o título
+    text-align: center;
   }
 }
 
@@ -170,7 +170,7 @@ const cancel = () => {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
-  justify-content: center; // Centraliza os botões
+  justify-content: center;
 
   button {
     padding: 0.75rem 1.5rem;

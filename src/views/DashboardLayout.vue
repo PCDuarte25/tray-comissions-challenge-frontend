@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-layout">
-    <!-- Navbar lateral fixa -->
     <div class="sidebar">
       <h2>Admin Dashboard</h2>
       <nav>

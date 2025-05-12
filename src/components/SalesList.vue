@@ -46,7 +46,7 @@ async function fetchSales(page = 1) {
   const token = localStorage.getItem('token')
   if (!token) return
 
-  const response = await fetch(`http://localhost:8000/api/v1/sale?page=${page}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/sale?page=${page}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

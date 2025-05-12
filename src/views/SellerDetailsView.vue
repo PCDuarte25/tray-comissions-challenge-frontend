@@ -91,7 +91,7 @@ async function fetchSellerDetails(id: string) {
   if (!token) return
 
   try {
-    const response = await fetch(`http://localhost:8000/api/v1/seller/${id}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/seller/${id}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ async function fetchSellerSales(id: string) {
   if (!token) return
 
   try {
-    const response = await fetch(`http://localhost:8000/api/v1/seller/${id}/sale`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/seller/${id}/sale`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ async function resendReport() {
   const date = formatApiDate(new Date())
 
   try {
-    const response = await fetch(`http://localhost:8000/api/v1/seller/${sellerId}/resend-report`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/seller/${sellerId}/resend-report`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

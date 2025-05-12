@@ -34,7 +34,7 @@ const newSeller = ref({
   email: '',
 })
 
-const emailError = ref('') // Variável para armazenar o erro de email
+const emailError = ref('')
 const router = useRouter()
 
 async function createSeller() {
@@ -42,7 +42,7 @@ async function createSeller() {
   if (!token) return
 
   try {
-    const response = await fetch('http://localhost:8000/api/v1/seller', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/seller`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
